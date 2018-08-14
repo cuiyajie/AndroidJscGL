@@ -11,6 +11,8 @@
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_fex_momo_com_androidjscgl_drawGL(JNIEnv *env, jobject instance, jstring jscode) {
-
+Java_fex_momo_com_androidjscgl_drawGL(JNIEnv *env, jobject instance, JSStringRef jscode) {
+    JSContextRef ctx = new JSContextRef();
+    JSC::makeFunction(ctx, "clearColor", );
+    JSC::evaluateScript(ctx, jscode);
 }
