@@ -5,13 +5,11 @@ file(GLOB app_src_files
 
 add_library( native-lib SHARED ${app_src_files} )
 
-include_directories(SYSTEM ${CMAKE_SOURCE_DIR}/src/main/cpp )
+add_library( jsc SHARED IMPORTED)
 
-add_library( jsc-lib SHARED IMPORTED)
-
-set_target_properties( jsc-lib
+set_target_properties( jsc
                       PROPERTIES IMPORTED_LOCATION
                       ${CMAKE_SOURCE_DIR}/src/main/jniLibs/${ANDROID_ABI}/libjsc.so )
 
 find_library( log-lib log )
-target_link_libraries( native-lib ${log-lib} jsc-lib )
+target_link_libraries( native-lib ${log-lib} jsc EGL GLESv2 )
