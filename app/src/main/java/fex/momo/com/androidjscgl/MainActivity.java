@@ -15,19 +15,19 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onDrawFrame(GL10 gl10) {
-            drawGL(js);
+            runScript(js);
         }
 
         @Override
         public void onSurfaceCreated(GL10 gl10, EGLConfig eglConfig) {
+            bootstrap();
         }
 
         @Override
         public void onSurfaceChanged(GL10 gl10, int i, int i1) {
-
+			nativeSurfaceChanged(i, i1);
         }
     }
-
 
 
     @Override
@@ -42,11 +42,24 @@ public class MainActivity extends AppCompatActivity {
         js = FileUtils.getFromAssets(this, "gl-sample.js");
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        destory();
+    }
+
     /**
      * A native method that is implemented by the 'main' native library,
      * which is packaged with this application.
      */
-    public native void drawGL(String jscode);
+
+    public native void bootstrap();
+
+    public native void destory();
+
+    public native void runScript(String jscode);
+
+    public native void nativeSurfaceChanged(int w, int h);
 
     // Used to load the 'native-lib' library on application startup.
     static {

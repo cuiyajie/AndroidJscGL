@@ -32,5 +32,6 @@
 #include "JSStringRef.h"
 #include "JSObjectRef.h"
 #include "JSValueRef.h"
+#include "JSTypedArrayRef.h"
 
 #endif /* JavaScript_h */
